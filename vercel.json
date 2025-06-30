@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "buildCommand": "cd client && npm install && npm run build",
+  "installCommand": "cd client && npm install",
+  "outputDirectory": "client/dist",
+  "devCommand": "cd client && npm run dev",
+  "framework": null,
+
+  "functions": {
+    "server/index.js": {
+      "runtime": "@vercel/node@18"
+    }
+  },
+
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/index.js"
+    },
+    {
+      "src": "/ws",
+      "dest": "/server/index.js"
+    },
+    {
+      "src": "/admin/api/(.*)",
+      "dest": "/server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/index.html"
+    }
+  ],
+
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
